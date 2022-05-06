@@ -36,5 +36,31 @@
 }
 
 .screen{
+    display: block;
+    border: 2px solid #3CA1D9; 
+    width: 70%;
+    height: 150px;
+    margin: 50px auto;
+    resize: none;
+    overflow: auto;
+}
 
+.keyboardBox{
+    border: 2px solid #3CA1D9; 
+    margin: 50px auto;
+    width: 90%;
+    height: 100%;
+}
+
+.key{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3CA1D9;
+    margin: 3px;
+    padding: 3px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
