@@ -1,4 +1,3 @@
-let keys = [167, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, 113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, 13, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92, 96, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
 
 const keyboardConfig = [
     [
@@ -15,10 +14,10 @@ const keyboardConfig = [
         { key: '0', shiftKey: ')' },
         { key: '-', shiftKey: '_' },
         { key: '=', shiftKey: '+' },
-        { key: 'Backspace'},
+        { key: 'Backspace' },
     ],
     [
-        { key: 'Tab'},
+        { key: 'Tab' },
         { key: 'q' },
         { key: 'w' },
         { key: 'e' },
@@ -32,10 +31,10 @@ const keyboardConfig = [
         { key: '[', shiftKey: '{' },
         { key: ']', shiftKey: '}' },
         { key: '\\', shiftKey: '|' },
-        { key: 'Del'},
+        { key: 'Del' },
     ],
     [
-        { key: 'CapsLock'},
+        { key: 'CapsLock' },
         { key: 'a' },
         { key: 's' },
         { key: 'd' },
@@ -47,10 +46,10 @@ const keyboardConfig = [
         { key: 'l' },
         { key: ';', shiftKey: ':' },
         { key: '\'', shiftKey: '\"' },
-        { key: 'Enter'},
+        { key: 'Enter' },
     ],
     [
-        { key: 'Shift'},
+        { key: 'Shift' },
         { key: 'z' },
         { key: 'x' },
         { key: 'c' },
@@ -62,10 +61,10 @@ const keyboardConfig = [
         { key: '.', shiftKey: '>' },
         { key: '/', shiftKey: '?' },
         { key: '▲' },
-        { key: 'Shift'},
+        { key: 'Shift' },
     ],
     [
-        { key: 'Ctrl'},
+        { key: 'Ctrl' },
         { key: 'Win' },
         { key: 'Alt' },
         { key: '         ' },
@@ -73,32 +72,222 @@ const keyboardConfig = [
         { key: '◀' },
         { key: '▼' },
         { key: '▶' },
-        { key: 'Ctrl'},
+        { key: 'Ctrl' },
+    ],
+];
+
+const keyboardConfigRu = [
+    [
+        { key: 'ё' },
+        { key: '1', shiftKey: '!' },
+        { key: '2', shiftKey: '\\' },
+        { key: '3', shiftKey: '№' },
+        { key: '4', shiftKey: ';' },
+        { key: '5', shiftKey: '%' },
+        { key: '6', shiftKey: ':' },
+        { key: '7', shiftKey: '?' },
+        { key: '8', shiftKey: '*' },
+        { key: '9', shiftKey: '(' },
+        { key: '0', shiftKey: ')' },
+        { key: '-', shiftKey: '_' },
+        { key: '=', shiftKey: '+' },
+        { key: 'Backspace' },
+    ],
+    [
+        { key: 'Tab' },
+        { key: 'й' },
+        { key: 'ц' },
+        { key: 'у' },
+        { key: 'к' },
+        { key: 'е' },
+        { key: 'н' },
+        { key: 'г' },
+        { key: 'ш' },
+        { key: 'щ' },
+        { key: 'з' },
+        { key: 'х' },
+        { key: 'ъ' },
+        { key: '\\', shiftKey: '/' },
+        { key: 'Del' },
+    ],
+    [
+        { key: 'CapsLock' },
+        { key: 'ф' },
+        { key: 'ы' },
+        { key: 'в' },
+        { key: 'а' },
+        { key: 'п' },
+        { key: 'р' },
+        { key: 'о' },
+        { key: 'л' },
+        { key: 'д' },
+        { key: 'ж' },
+        { key: 'э' },
+        { key: 'Enter' },
+    ],
+    [
+        { key: 'Shift' },
+        { key: 'я' },
+        { key: 'ч' },
+        { key: 'с' },
+        { key: 'м' },
+        { key: 'и' },
+        { key: 'т' },
+        { key: 'ь' },
+        { key: 'б' },
+        { key: 'ю' },
+        { key: '.', shiftKey: ',' },
+        { key: '▲' },
+        { key: 'Shift' },
+    ],
+    [
+        { key: 'Ctrl' },
+        { key: 'Win' },
+        { key: 'Alt' },
+        { key: '         ' },
+        { key: 'Alt' },
+        { key: '◀' },
+        { key: '▼' },
+        { key: '▶' },
+        { key: 'Ctrl' },
     ],
 ]
 
-function init (){
+const config = {
+    Backquote: {
+        en: {
+            caseDown: '`',
+            caseUp: '~',
+            caps: '`',
+            shiftCaps: '~',
+        },
+        ru: {
+            caseDown: '`',
+            caseUp: '~',
+            caps: '`',
+            shiftCaps: '~',
+        },
+    },
+    Digit1: {
+        en: {
+            caseDown: '1',
+            caseUp: '!',
+            caps: '1',
+            shiftCaps: '!',
+        },
+        ru: {
+            caseDown: '1',
+            caseUp: '!',
+            caps: '1',
+            shiftCaps: '!',
+        },
+    },
+    Digit2: {
+        en: {
+            caseDown: '2',
+            caseUp: '@',
+            caps: '2',
+            shiftCaps: '@',
+        },
+        ru: {
+            caseDown: '2',
+            caseUp: '\"',
+            caps: '2',
+            shiftCaps: '\"',
+        },
+    },
+    Tab: {
+        en: {
+            caseDown: 'Tab',
+            caseUp: 'Tab',
+            caps: 'Tab',
+            shiftCaps: 'Tab',
+        },
+        ru: {
+            caseDown: 'Tab',
+            caseUp: 'Tab',
+            caps: 'Tab',
+            shiftCaps: 'Tab',
+        },
+    },
+    KeyQ: {
+        en: {
+            caseDown: 'q',
+            caseUp: 'Q',
+            caps: 'Q',
+            shiftCaps: 'q',
+        },
+        ru: {
+            caseDown: 'й',
+            caseUp: 'Й',
+            caps: 'Й',
+            shiftCaps: 'й',
+        },
+    },
+
+    KeyW: {
+        en: {
+            caseDown: 'w',
+            caseUp: 'W',
+            caps: 'W',
+            shiftCaps: 'w',
+        },
+        ru: {
+            caseDown: 'ц',
+            caseUp: 'Ц',
+            caps: 'Ц',
+            shiftCaps: 'ц',
+        },
+    }
+
+};
+
+const rows = [
+    ['Backquote', 'Digit1', 'Digit2'],
+    ['Tab', 'KeyQ', 'KeyW']
+];
+
+
+
+function generateKeyboard() {
+    const keyboard = document.createElement('div');
+    keyboard.classList.add('keyboard-box');
+
+    rows.forEach((row) => {
+        const rowElement = document.createElement('div');
+        rowElement.classList.add('keyboard-row');
+
+        row.forEach((key) => {
+            const keyElement = document.createElement('div');
+            keyElement.classList.add('key');
+
+            const ruElement = document.createElement('div');
+            ruElement.classList.add('ru');
+            ruElement.innerHTML = `<span class='caseDown hidden'>${config[key].ru.caseDown}</span><span class='caseUp hidden'>${config[key].ru.caseUp}</span><span class='caps hidden'>${config[key].ru.caps}</span><span class='shiftCaps hidden'>${config[key].ru.shiftCaps}</span>`
+
+            const enElement = document.createElement('div');
+            enElement.classList.add('en');
+            enElement.innerHTML = `<span class='caseDown hidden'>${config[key].en.caseDown}</span><span class='caseUp hidden'>${config[key].en.caseUp}</span><span class='caps hidden'>${config[key].en.caps}</span><span class='shiftCaps hidden'>${config[key].en.shiftCaps}</span>`
+            
+            keyElement.appendChild(ruElement);
+            keyElement.appendChild(enElement);
+
+            rowElement.appendChild(keyElement);
+        });
+        keyboard.appendChild(rowElement);
+    });
+    document.body.appendChild(keyboard);
+}
+generateKeyboard()
+
+function init() {
     let title = "";
     let screen = "";
-    let keyboardBox = "";
     let settings = "";
-    title +="<div class = 'box'><h1 class = 'title'> Virual Ketboard </h1></div>"
-    screen +="<textera class = 'screen'></textera>"
-
-    let html = "";
-    keyboardConfig.forEach((row) => {
-        html += '<div class="row">';
-
-        row.forEach((obj) => {
-            html += `<div class="key">${obj.key}</div>`
-        });
-
-        html += '</div>';
-    });
-
-    keyboardBox +=`<div class='keyboardBox'>${html}</div>`;
+    title += "<div class = 'box'><h1 class = 'title'> Virual Ketboard </h1></div>";
+    screen += "<textera class = 'screen'></textera>";
     settings += "<div class='box'></div>"
-    document.body.innerHTML = title + screen + keyboardBox + settings;
+   // document.body.appendChild(keyboard);
 }
 init();
 
