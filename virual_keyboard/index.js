@@ -238,13 +238,30 @@ const config = {
             caps: 'Ц',
             shiftCaps: 'ц',
         },
+    },
+
+
+    CapsLock: {
+    en: {    
+        caseDown: 'CapsLock',
+        caseUp: 'CapsLock',
+        caps: 'CapsLock',
+        shiftCaps: 'CapsLock',
+    },
+    ru: {
+        caseDown: 'CapsLock',
+        caseUp: 'CapsLock',
+        caps: 'CapsLock',
+        shiftCaps: 'CapsLock',
+    }, 
     }
 
 };
 
 const rows = [
     ['Backquote', 'Digit1', 'Digit2'],
-    ['Tab', 'KeyQ', 'KeyW']
+    ['Tab', 'KeyQ', 'KeyW'],
+    ['CapsLock']
 ];
 
 
@@ -260,6 +277,7 @@ function generateKeyboard() {
         row.forEach((key) => {
             const keyElement = document.createElement('div');
             keyElement.classList.add('key');
+            keyElement.dataset.key = key;
 
             const ruElement = document.createElement('div');
             ruElement.classList.add('ru');
@@ -267,7 +285,7 @@ function generateKeyboard() {
 
             const enElement = document.createElement('div');
             enElement.classList.add('en');
-            enElement.innerHTML = `<span class='caseDown hidden'>${config[key].en.caseDown}</span><span class='caseUp hidden'>${config[key].en.caseUp}</span><span class='caps hidden'>${config[key].en.caps}</span><span class='shiftCaps hidden'>${config[key].en.shiftCaps}</span>`
+            enElement.innerHTML = `<span class='caseDown '>${config[key].en.caseDown}</span><span class='caseUp hidden'>${config[key].en.caseUp}</span><span class='caps hidden'>${config[key].en.caps}</span><span class='shiftCaps hidden'>${config[key].en.shiftCaps}</span>`
             
             keyElement.appendChild(ruElement);
             keyElement.appendChild(enElement);
@@ -279,6 +297,42 @@ function generateKeyboard() {
     document.body.appendChild(keyboard);
 }
 generateKeyboard()
+
+
+let allKey = document.querySelectorAll(".key");
+allKey.forEach((el) =>{
+    el.addEventListener("mousedown", event => {
+        el.classList.add('active');
+    });
+    el.addEventListener("mouseup", event => {
+        el.classList.remove('active');
+    });
+});
+
+function generateTextarea() {
+    let screen = document.createElement('textarea');
+    screen.classList.add('textarea');
+    screen.id ='textarea';
+
+    document.body.appendChild(screen);
+}
+
+generateTextarea();
+
+let textereaElement = document.getElementById('textarea');
+
+    allKey.forEach((el) =>{
+        el.addEventListener("click", imput => {
+            if ( document.querySelector('.active[data-key = ShiftLeft ]') || document.querySelector('.active[data-key = ShiftRight ]')){
+                textereaElement.value = textereaElement.value + el.querySelector (".en").querySelector('.caseUP').innerText; 
+            }
+            if (document.querySelector('.active[data-key = CapsLock ]') || document.querySelector('.active[data-key = CapsLock ]')){
+                textereaElement.value = textereaElement.value + el.querySelector (".en").querySelector('.caps').innerText; 
+            }
+            textereaElement.value = textereaElement.value + el.querySelector (".en").querySelector('.caseDown').innerText;
+        });
+    });
+
 
 function init() {
     let title = "";
