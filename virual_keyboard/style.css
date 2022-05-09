@@ -102,3 +102,86 @@
     font-size: 18px;
     color: #444444;
 }
+.key[data-key=Tab] {
+    width: 50px;
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=CapsLock]{
+    width: 100px;
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=Backspace]{
+    width: 100px;
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=ShiftLeft] {
+    width: 100px;
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key:hover{
+    background-color: rgba(0, 255, 255, 0.475);
+}
+
+.key[data-key=AltLeft]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=AltRight]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=ArrowUp]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=ArrowRight]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=ArrowLeft]{
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=ArrowDown]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=ControlLeft]{
+    font-weight: 600;
+    background-color: #222222;
+}
+
+.key[data-key=ControlRight]{
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=MetaLeft]{
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=Delete]{
+    font-weight: 600;
+    background-color: #222222;
+}
+.key[data-key=Enter]{
+    width: 86px;
+    background-color: #222222;
+}
+.key[data-key=ShiftRight]{
+    width: 86px;
+    background-color: #222222;
+}
+.key[data-key=Space] {
+    width: 330px;
+}
