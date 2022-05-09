@@ -391,20 +391,6 @@ const config = {
       shiftCaps: '/',
     },
   },
-  Delete: {
-    en: {
-      caseDown: 'Del',
-      caseUp: 'Del',
-      caps: 'Del',
-      shiftCaps: 'Del',
-    },
-    ru: {
-      caseDown: 'Del',
-      caseUp: 'Del',
-      caps: 'Del',
-      shiftCaps: 'Del',
-    },
-  },
   CapsLock: {
     en: {
       caseDown: 'CapsLock',

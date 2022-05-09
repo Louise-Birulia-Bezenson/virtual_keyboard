@@ -2,7 +2,7 @@ import config from './config.js';
 
 const rows = [
   ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
-  ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete'],
+  ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
   ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
   ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
@@ -14,6 +14,14 @@ let lang = window.localStorage.getItem('lang') || 'en';
 let size = 'caseDown';
 let sizeLast = 'caseUp';
 let langLast = 'ru';
+
+function generateTitle() {
+  const title = document.createElement('div');
+  title.innerHTML = '<h1 class="title">Keyboard</h1>';
+  document.body.appendChild(title);
+  return title;
+}
+generateTitle();
 
 function generateTextarea() {
   const screen = document.createElement('textarea');
@@ -58,6 +66,23 @@ function generateKeyboard() {
 }
 generateKeyboard();
 
+function generateSettings() {
+  const setting = document.createElement('div');
+  setting.classList.add('description');
+  setting.innerHTML = '<span class="description">Клавиатура создана в macOS</span>';
+  const setting2 = document.createElement('div');
+  setting2.classList.add('description');
+  setting2.innerHTML = '<span class="description">Для переключения языка использовать левыe ctrl + alt</span>';
+  const setting3 = document.createElement('div');
+  setting3.classList.add('description');
+  setting3.innerHTML = '<span class="description">☺</span>';
+  document.body.appendChild(setting);
+  document.body.appendChild(setting2);
+  document.body.appendChild(setting3);
+  return setting;
+}
+generateSettings();
+
 const allKey = document.querySelectorAll('.key');
 
 function keyboardStyle() {
@@ -72,11 +97,62 @@ keyboardStyle();
 
 allKey.forEach((el) => {
   el.addEventListener('mousedown', () => {
+    if (el.dataset.key === 'CapsLock') {
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+        size = 'caseDown';
+        sizeLast = 'caps';
+        keyboardStyle();
+        return;
+      }
+      el.classList.add('active');
+      size = 'caps';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+      return;
+    }
     el.classList.add('active');
+    if (el.dataset.key === 'ShiftLeft' && document.querySelector('.active[data-key=CapsLock]')) {
+      size = 'shiftCaps';
+      sizeLast = 'caps';
+      keyboardStyle();
+      return;
+    }
+    if (el.dataset.key === 'ShiftLeft') {
+      size = 'caseUp';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+      return;
+    }
+    if (el.dataset.key === 'ShiftRight') {
+      size = 'caseUp';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+    }
   });
 
   el.addEventListener('mouseup', () => {
+    if (el.dataset.key === 'CapsLock') {
+      return;
+    }
     el.classList.remove('active');
+    if (el.dataset.key === 'ShiftLeft' && document.querySelector('.active[data-key=CapsLock]')) {
+      size = 'caps';
+      sizeLast = 'shiftCaps';
+      keyboardStyle();
+      return;
+    }
+    if (el.dataset.key === 'ShiftLeft') {
+      size = 'caseDown';
+      sizeLast = 'caseUp';
+      keyboardStyle();
+      return;
+    }
+    if (el.dataset.key === 'ShiftRight') {
+      size = 'caseDown';
+      sizeLast = 'caseUp';
+      keyboardStyle();
+    }
   });
 });
 
@@ -96,6 +172,18 @@ document.addEventListener('keydown', (e) => {
         window.localStorage.setItem('lang', lang);
         keyboardStyle();
       }
+    }
+    if (e.code === 'CapsLock') {
+      size = 'caps';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+      return;
+    }
+    if (e.code === 'ShiftLeft' && document.querySelector('.active[data-key=CapsLock]')) {
+      size = 'shiftCaps';
+      sizeLast = 'caps';
+      keyboardStyle();
+      return;
     }
     if (e.code === 'ShiftLeft') {
       size = 'caseUp';
@@ -135,10 +223,23 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
   if (document.querySelector(`[data-key=${e.code}]`)) {
     document.querySelector(`[data-key=${e.code}]`).classList.remove('active');
+    if (e.code === 'ShiftLeft' && document.querySelector('.active[data-key=CapsLock]')) {
+      size = 'caps';
+      sizeLast = 'shiftCaps';
+      keyboardStyle();
+      return;
+    }
     if (e.code === 'ShiftLeft') {
       size = 'caseDown';
       sizeLast = 'caseUp';
       keyboardStyle();
+      return;
+    }
+    if (e.code === 'CapsLock') {
+      size = 'caseDown';
+      sizeLast = 'caps';
+      keyboardStyle();
+      return;
     }
     if (e.code === 'ShiftRight') {
       size = 'caseDown';
@@ -169,6 +270,6 @@ allKey.forEach((el) => {
     if (specButton.includes(el.dataset.key)) {
       return;
     }
-    textereaElement.value += el.querySelector(`.${lang}`).querySelector('.caseDown').innerText;
+    textereaElement.value += el.querySelector(`.${lang}`).querySelector(`.${size}`).innerText;
   });
 });
