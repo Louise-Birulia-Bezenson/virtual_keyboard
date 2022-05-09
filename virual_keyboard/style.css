@@ -46,6 +46,7 @@
 }
 
 .keyboard-box{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     width: 704px;
     margin: 0 auto;
     padding: 5px;
@@ -88,10 +89,6 @@
 .hidden {
     display: none;
 }
-.active {
-    background-color: #2cfd72;
-    border-radius: 50px;
-}
 
 .textarea {
     display: block;
@@ -102,86 +99,49 @@
     font-size: 18px;
     color: #444444;
 }
+
+.key[data-key=Tab],
+.key[data-key=CapsLock],
+.key[data-key=Backspace],
+.key[data-key=ShiftLeft],
+.key[data-key=AltLeft],
+.key[data-key=AltRight],
+.key[data-key=ArrowUp],
+.key[data-key=ArrowRight],
+.key[data-key=ArrowLeft],
+.key[data-key=ArrowDown],
+.key[data-key=ControlLeft],
+.key[data-key=ControlRight],
+.key[data-key=MetaLeft],
+.key[data-key=Delete],
+.key[data-key=Enter],
+.key[data-key=ShiftRight] {
+    font-weight: 600;
+    background-color: #222222;
+}
+
 .key[data-key=Tab] {
     width: 50px;
-    font-weight: 600;
-    background-color: #222222;
 }
 
-.key[data-key=CapsLock]{
-    width: 100px;
-    font-weight: 600;
-    background-color: #222222;
-}
-.key[data-key=Backspace]{
-    width: 100px;
-    font-weight: 600;
-    background-color: #222222;
-}
+.key[data-key=CapsLock],
+.key[data-key=Backspace],
 .key[data-key=ShiftLeft] {
     width: 100px;
-    font-weight: 600;
-    background-color: #222222;
 }
 
-.key:hover{
-    background-color: rgba(0, 255, 255, 0.475);
-}
-
-.key[data-key=AltLeft]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=AltRight]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=ArrowUp]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=ArrowRight]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=ArrowLeft]{
-    font-weight: 600;
-    background-color: #222222;
-}
-.key[data-key=ArrowDown]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=ControlLeft]{
-    font-weight: 600;
-    background-color: #222222;
-}
-
-.key[data-key=ControlRight]{
-    font-weight: 600;
-    background-color: #222222;
-}
-.key[data-key=MetaLeft]{
-    font-weight: 600;
-    background-color: #222222;
-}
-.key[data-key=Delete]{
-    font-weight: 600;
-    background-color: #222222;
-}
-.key[data-key=Enter]{
+.key[data-key=Enter],
+.key[data-key=ShiftRight] {
     width: 86px;
-    background-color: #222222;
-}
-.key[data-key=ShiftRight]{
-    width: 86px;
-    background-color: #222222;
 }
 .key[data-key=Space] {
     width: 330px;
+}
+.key[data-key]:hover {
+    background-color: #00ffff44;
+}
+.active[data-key],
+.active[data-key]:hover {
+    background-color: #00ffff;
+    border-radius: 50px;
 }

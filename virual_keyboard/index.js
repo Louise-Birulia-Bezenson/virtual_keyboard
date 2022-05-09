@@ -6,13 +6,13 @@ const rows = [
   ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
   ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
-
 ];
 
 const specButton = ['ShiftLeft', 'CapsLock', 'Tab', 'Backspace', 'Delete', 'Enter', 'ShiftRight', 'ControlLeft', 'ControlRight', 'AltRight', 'AltLeft', 'MetaLeft'];
 
 let lang = window.localStorage.getItem('lang') || 'en';
 let size = 'caseDown';
+let sizeLast = 'caseUp';
 let langLast = 'ru';
 
 function generateTextarea() {
@@ -61,10 +61,10 @@ generateKeyboard();
 const allKey = document.querySelectorAll('.key');
 
 function keyboardStyle() {
-    console.log(allKey);
   allKey.forEach((el) => {
-      console.log(el);
-    el.querySelector(`.${langLast}`).querySelector(`.${size}`).classList.add('hidden');
+    el.querySelector(`.${langLast}`).classList.add('hidden');
+    el.querySelector(`.${lang}`).classList.remove('hidden');
+    el.querySelector(`.${lang}`).querySelector(`.${sizeLast}`).classList.add('hidden');
     el.querySelector(`.${lang}`).querySelector(`.${size}`).classList.remove('hidden');
   });
 }
@@ -73,27 +73,17 @@ keyboardStyle();
 allKey.forEach((el) => {
   el.addEventListener('mousedown', () => {
     el.classList.add('active');
-    if (document.querySelector('.active[data-key = CapsLock]')) {
-      allKey.forEach((el) => {
-        el.querySelector(`.${lang}`).querySelector('.caseDown').classList.add('hidden');
-        el.querySelector(`.${lang}`).querySelector('.caps').classList.remove('hidden');
-      });
-    } else {
-      allKey.forEach((el) => {
-        el.querySelector(`.${lang}`).querySelector('.caseDown').classList.remove('hidden');
-        el.querySelector(`.${lang}`).querySelector('.caps').classList.add('hidden');
-      });
-    }
   });
+
   el.addEventListener('mouseup', () => {
     el.classList.remove('active');
   });
 });
 
 document.addEventListener('keydown', (e) => {
+  e.preventDefault();
   document.querySelector(`[data-key=${e.code}]`).classList.add('active');
   if (specButton.includes(e.code)) {
-      console.log (lang);
     if (e.code === 'AltLeft' && e.ctrlKey === true) {
       if (lang === 'en') {
         lang = 'ru';
@@ -107,19 +97,54 @@ document.addEventListener('keydown', (e) => {
         keyboardStyle();
       }
     }
+    if (e.code === 'ShiftLeft') {
+      size = 'caseUp';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+      return;
+    }
+    if (e.code === 'ShiftRight') {
+      size = 'caseUp';
+      sizeLast = 'caseDown';
+      keyboardStyle();
+      return;
+    }
+    if (e.code === 'Tab') {
+      textereaElement.value += '  ';
+      return;
+    }
+    if (e.code === 'Backspace') {
+      textereaElement.value = textereaElement.value.substring(0, textereaElement.value.length - 1);
+      return;
+    }
+    if (e.code === 'Enter') {
+      textereaElement.value += '\n';
+      return;
+    }
+
     return;
   }
   if (document.querySelector(`[data-key=${e.code}]`)) {
     if (e.code === 'Space') {
       textereaElement.value += ' ';
     }
-    textereaElement.value += document.querySelector(`.active[data-key=${e.code}]`).querySelector(`.${lang}`).querySelector('.caseDown').innerText;
+    textereaElement.value += document.querySelector(`.active[data-key=${e.code}]`).querySelector(`.${lang}`).querySelector(`.${size}`).innerText;
   }
 });
 
 document.addEventListener('keyup', (e) => {
   if (document.querySelector(`[data-key=${e.code}]`)) {
     document.querySelector(`[data-key=${e.code}]`).classList.remove('active');
+    if (e.code === 'ShiftLeft') {
+      size = 'caseDown';
+      sizeLast = 'caseUp';
+      keyboardStyle();
+    }
+    if (e.code === 'ShiftRight') {
+      size = 'caseDown';
+      sizeLast = 'caseUp';
+      keyboardStyle();
+    }
   }
 });
 
@@ -129,29 +154,21 @@ allKey.forEach((el) => {
       textereaElement.value += ' ';
       return;
     }
+    if (el.dataset.key === 'Tab') {
+      textereaElement.value += '  ';
+      return;
+    }
+    if (el.dataset.key === 'Backspace') {
+      textereaElement.value = textereaElement.value.substring(0, textereaElement.value.length - 1);
+      return;
+    }
+    if (el.dataset.key === 'Enter') {
+      textereaElement.value += '\n';
+      return;
+    }
     if (specButton.includes(el.dataset.key)) {
-      return;
-    }
-    if (document.querySelector('.active[data-key = ShiftLeft]') || document.querySelector('.active[data-key = ShiftRight ]')) {
-      textereaElement.value += el.querySelector(`.${lang}`).querySelector('.caseUP').innerText;
-      return;
-    }
-    if (document.querySelector('.active[data-key = CapsLock]')) {
-      textereaElement.value += el.querySelector(`.${lang}`).querySelector('.caps').innerText;
       return;
     }
     textereaElement.value += el.querySelector(`.${lang}`).querySelector('.caseDown').innerText;
   });
 });
-
-function init() {
-  let title = '';
-  let screen = '';
-  let settings = '';
-  title += "<div class = 'box'><h1 class = 'title'> Virual Ketboard </h1></div>";
-  screen += "<textera class = 'screen'></textera>";
-  settings += "<div class='box'></div>";
-  // document.body.appendChild(keyboard);
-}
-
-init();
